@@ -1,0 +1,128 @@
+/* ============================
+			FONTS
+============================ */
+$primary-reg:  'ProximaNovReg', 'Work Sans', sans-serif;
+$primary-bold: 'ProximaNovBold', 'Work Sans', sans-serif;
+
+@mixin heading-bold {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+}
+
+@mixin heading-reg {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 400;
+}
+
+@mixin heading-light {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 300;
+}
+
+@mixin transition-background {
+  -webkit-transition: background .2s ease-in-out;
+  transition: background .2s ease-in-out;
+}
+
+@mixin transition-top-bar {
+    -webkit-transition: all .35s ease-in-out;
+    transition: all .35s ease-in-out;
+}
+
+@mixin transition-all {
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+
+@mixin transition-opacity {
+    -webkit-transition: opacity .2s ease-in-out;
+    transition: opacity .2s ease-in-out;
+}
+
+@mixin level-one-heading($color, $width) {
+  @include heading-bold;
+  color: $color;
+  text-transform: uppercase;
+  padding-bottom: 0px;
+  max-width: $width;
+  font-size: 2.5rem;
+}
+
+@mixin level-one-paragrah($color) {
+    color: $color;
+    @include heading-light;
+    text-transform: uppercase;
+    margin: 0rem;
+    padding-left: 0rem;
+    font-size: 1.4rem;
+}
+
+@mixin level-two-heading($color) {
+    color: $color;
+    max-width: 23rem;
+    font-size: 1.125rem;
+    font-family: $primary-reg;
+    line-height: 1.5rem;
+    font-weight: 300;
+}
+
+@mixin line {
+    height: .1875rem;
+    max-width: 4.688rem;
+    background-color: $secondary-color;
+    margin: 2.625rem 0rem;
+}
+
+
+/* ============================
+      BREAK POINT
+============================ */
+
+//MQ's
+$MQs: true;
+
+@mixin bp($point) {
+  @if ($MQs) {
+    $bp-s: "(max-width: 40.063em)";
+    $bp-m: "(max-width: 1250px)";
+    $bp-l: "(max-width: 1600px)";
+  
+    @if $point == l {
+      @media #{$bp-l} { @content; }
+    }
+    @else if $point == m {
+      @media #{$bp-m} { @content; }
+    }
+    @else if $point == s {
+      @media #{$bp-s}  { @content; }
+    }
+  }
+}
+
+
+
+/* ============================
+			COLORS
+============================ */
+$primary-color: #FF4814;
+$secondary-color: #008A9E;
+
+$font-color: #7F8082;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

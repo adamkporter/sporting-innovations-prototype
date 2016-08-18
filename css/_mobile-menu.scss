@@ -1,0 +1,94 @@
+$mobile-nav-width: 230px; // Set the width of the mobile menu
+$animation-time: 400ms; // Set the animation speed
+$animation-function: ease; // Set the animation type
+
+/**
+* Define our transition mixin just to save time later
+*/
+@mixin transition($property, $time, $function){
+  -webkit-transition: $property $time $function;
+  -moz-transition: $property $time $function;
+  -ms-transition: $property $time $function;
+  -o-transition: $property $time $function;
+  transition: $property $time $function;
+}
+
+/*Some generic body styles + the animation required for the body shifting right when we toggle the menu */
+body{
+  font-family: sans-serif; margin: 0; padding: 0;
+  @include transition(all, $animation-time, $animation-function);
+}
+
+/*// Our nav*/
+nav{
+  width: 100%; background: #eaeaea; display: table;
+
+  /*// Just style up the anchors*/
+  a{ 
+    color: #000; text-decoration: none;
+     
+    /*// Specific style for the nav title*/
+    &.title{ float: left; padding: 10px; font-weight: bold; }
+    
+    &:hover{ background-color: darken(#eaeaea, 10%); }
+  }
+  
+  /*// Our menu element*/
+  ul.menu {
+    float: right;
+    margin: 0; padding: 0;
+    list-style-type: none;
+    letter-spacing: -4px; // This is a hack to make sure the menu item elements have no margins when we inline-block them
+    li.menu-item {
+      letter-spacing: normal; // Hack, reset the letter spacing so they display correctly
+      display: inline-block;
+      a{
+        padding: 10px; display: block;
+      }
+    }  
+  }
+  
+  /*// The mobile menu button, which we hide by default*/
+  a.mobile-menu{
+    display: none;
+    float: right; padding: 10px;
+  }
+}
+
+div.container{
+  padding: 20px;
+}
+
+/*// Media query time*/
+@media screen and (max-width: 600px){
+  /*// Our nav*/
+  nav{
+   /* // The menu*/
+    ul.menu{
+      background: #3a3a3a;
+      width: $mobile-nav-width; height: 100%;
+      position: fixed; top: 0; right: -$mobile-nav-width;
+      @include transition(all, $animation-time, $animation-function);
+      
+      /*// Just some arbitrary styles for the fly-out menu*/
+      li.menu-item{
+        display: block; border-bottom: 1px solid darken(#3a3a3a, 2%);
+        a{ color: #FFF;
+          &:hover{ background: darken(#3a3a3a, 10%); }
+        }
+      }
+    }
+    
+   /* // Now we can display that mobile menu button*/
+    a.mobile-menu{ display: block; }
+  }
+  
+  /*// Once the menu is toggled, we add a class to the body. This applies the appropirate margins and positoning to the elements*/
+  body.nav-open{
+    margin-left: -$mobile-nav-width; margin-right: $mobile-nav-width;
+    nav {
+      ul.menu{
+        right: 0;
+      }
+    }
+  }
